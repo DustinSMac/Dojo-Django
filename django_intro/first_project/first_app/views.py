@@ -2,7 +2,14 @@ from django.shortcuts import render, HttpResponse, redirect
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Placeholder to later display a list of all blogs")
+    # return HttpResponse("Placeholder to later display a list of all blogs")
+    # return render(request, "index.html")
+    context = {
+    	"name": "Noelle",
+    	"favorite_color": "turquoise",
+    	"pets": ["Bruce", "Fitz", "Georgie"]
+    }
+    return render(request, "index.html", context)
 
 def new(request):
     return HttpResponse("Placeholder to display a new form to create a new blog")
@@ -18,3 +25,4 @@ def edit(request, number):
 
 def destroy(request, number):
     return redirect('/')
+
