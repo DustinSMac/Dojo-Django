@@ -1,0 +1,16 @@
+.col{
+    border: thick double #319de1;
+    border-radius: 2%;
+}
+
+body{
+    background-color: grey;
+}
+
+.overflow-auto{
+    height: 20vh;
+    border: thick double #319de1;
+    background-color:white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

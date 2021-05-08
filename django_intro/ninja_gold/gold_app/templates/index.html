@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+    <title>Gold_App</title>
+</head>
+
+<body>
+    <h6>Current gold: {{request.session.gold}}</h6>
+    <a href="/reset"><button class="btn btn-primary">Reset</button></a>
+
+    <div class="container">
+        <div class="row">
+            <div class="col col-md-3">
+                <form method="post" action="/submit">
+                    {% csrf_token %}
+                    <h4>Farm</h4>
+                    <h6>(Earn 10-20 gold)</h6>
+                    <input type="hidden" name="location" value="farm">
+                    <button type="submit" class="btn btn-primary">Earn Gold!</button>
+                </form>
+            </div>
+            <div class="col col-md-3">
+                <form method="post" action="/submit">
+                    {% csrf_token %}
+                    <h4>Cave</h4>
+                    <h6>(Earn 5-10 gold)</h6>
+                    <input type="hidden" name="location" value="cave">
+                    <button type="submit" class="btn btn-primary">Earn Gold!</button>
+                </form>
+            </div>
+            <div class="col col-md-3">
+                <form method="post" action="/submit">
+                    {% csrf_token %}
+                    <h4>House</h4>
+                    <h6>(Earn 2-5 gold)</h6>
+                    <input type="hidden" name="location" value="house">
+                    <button type="submit" class="btn btn-primary">Earn Gold!</button>
+                </form>
+            </div>
+            <div class="col col-md-3">
+                <form method="post" action="/submit">
+                    {% csrf_token %}
+                    <h4>Casino</h4>
+                    <h6>(Earn up to 50 gold)</h6>
+                    <h6>"Warning": might lose up to 50 gold</h6>
+                    <input type="hidden" name="location" value="casino">
+                    <button type="submit" class="btn btn-primary">Test your luck!</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <p>Activity:</p>
+            <div id="activity-box" class="overflow-auto">
+            {% for activity in request.session.activities reversed %}
+                <p>{{activity.message}}</p>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous">
+    </script>
+
+</body>
+
+</html>
