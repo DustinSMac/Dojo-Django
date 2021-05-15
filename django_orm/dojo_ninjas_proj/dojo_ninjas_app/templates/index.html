@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Dojos and Ninjas</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+        <div class="col col-6">
+            <h2 style="text-align: center;">Add a Dojo</h2>
+            <form method="post" action="addDojo">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col col-2">
+                        <label>Name</label>
+                    </div>
+                    <div class="col col-4">
+                        <input type="text" name="name">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-2">
+                        <label>City</label>
+                    </div>
+                    <div class="col col-4">
+                        <input type="text" name="city">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-2">
+                        <label>State</label>
+                    </div>
+                    <div class="col col-4">
+                        <input type="text" name="state">
+                    </div>
+                </div>
+                <div><button class="btn btn-primary" type="submit">Add Dojo</button></div>
+            </form>
+        </div>
+        <div class="col col-6">
+            <h2 style="text-align:center;">Add a Ninja</h2>
+            <form method="post" action="addNinja">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col col-2">
+                        <label>First Name</label>
+                    </div>
+                    <div class="col col-4">
+                        <input type="text" name="first_name">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-2">
+                        <label>Last Name</label>
+                    </div>
+                    <div class="col col-4">
+                        <input type="text" name="last_name">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-2">
+                        <label>Dojo</label>
+                    </div>
+                    <div class="col col-4">
+                        <select name="dojo">
+                            {% for dojo in all_dojos %}
+                            <option value={{dojo.name}}>{{dojo.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div><button class="btn btn-primary" type="submit">Add Ninja</button></div>
+            </form>
+        </div>
+        </div>
+    </div>
+    <hr>
+    <h1 style="text-align: center;">All the Dojos</h1>
+    {% for dojo in all_dojos %}
+        <p>Ninjas at the {{dojo.name}} Dojo</p>
+        <ul>
+        {% for ninja in dojo.ninjas.all %}
+            <li>{{ninja.first_name}} {{ninja.last_name}}</li>
+        {% endfor %}
+        </ul>
+    {% endfor %}
+    <script>
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
