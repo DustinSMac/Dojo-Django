@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books Authors App</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/79050dd7f1.js" crossorigin="anonymous"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Add a Book</h3>
+                <form method="post" action="addBook">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="Title">Title</label>
+                        <input type="text" class="form-control" name="title" placeholder="Book title here..">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" name="desc" placeholder="Description here.."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary float-end">Add Book</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <h3>Add an Authors</h3>
+                <form method="post" action="addAuthor">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="fname">First Name</label>
+                        <input type="text" class="form-control" name="fname" placeholder="...">
+                    </div>
+                    <div class="form-group">
+                        <label for="lname">Last Name</label>
+                        <input type="text" class="form-control" name="lname" placeholder="...">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Notes</label>
+                        <textarea class="form-control" name="notes" placeholder="Notes here.."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary float-end">Add Author</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>All Books</h3>
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book in all_Books %}
+                        <tr>
+                            <td>{{book.id}}</td>
+                            <td>{{book.title}}</td>
+                            <td>
+                                <a href="editBook/{{book.id}}">Edit</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-sm-6">
+                <h3>All Tables</h3>
+                <table class="table table-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for author in all_Authors %}
+                        <tr>
+                            <td>{{author.id}}</td>
+                            <td>{{author.first_name}} {{author.last_name}}</td>
+                            <td>
+                                <a href="editAuthor/{{author.id}}">Edit</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Boostrap bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

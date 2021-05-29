@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Editing</title>
+        <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/79050dd7f1.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <a href="/"><i class="fas fa-home">Home</i></a>
+    <h2>{{author.first_name}} {{author.last_name}}</h2>
+    <p>ID: {{author.id}}</p>
+    <p>Notes: {{author.notes}}</p>
+    <p>Bookss:</p>
+    <ul>
+        {% for book in books %}
+        <li>{{book.title}}</li>
+        {% endfor %}
+    </ul>
+    <form method="post" action="addBookToAuthor">
+        {% csrf_token %}
+        <input type="hidden" name="author_id" value="{{author.id}}">
+        <select name="book_selected" class="custom-select">
+            <option selected>Open this select menu</option>
+            {% for book in all_books %}
+            {% if book not in books %}
+            <option value='{{book.id}}'>{{book.title}}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+        <button type="submit">Add Book</button>
+    </form>
+    <form method="post" action="deleteBookFromAuthor">
+        {% csrf_token %}
+        <input type="hidden" name="author_id" value="{{author.id}}">
+        <select name="book_deleted" class="custom-select">
+            <option selected>Open this select menu</option>
+            {% for book in books %}
+            <option value='{{book.id}}'>{{book.title}}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Remove Book</button>
+    </form>
+</body>
+
+</html>
